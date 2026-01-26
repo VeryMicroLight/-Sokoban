@@ -21,6 +21,10 @@ public class PlayerController : MonoBehaviour
     private Vector3 targetPos;
     public LayerMask Colliderable;
     private RunLevel runLevel;
+    public AudioSource MusicSource;
+    public AudioClip MoveClip;
+    public AudioClip PushClip;
+
     private void Awake()
     {
         runLevel = Level.GetComponent<RunLevel>();
@@ -59,7 +63,7 @@ public class PlayerController : MonoBehaviour
             dir = new Vector3(ipt.x, ipt.y, 0);
 
             // 方向不为零时开始移动
-            if (dir != Vector3.zero && canMove(transform.position - posOffset, dir))
+            if (dir != Vector3.zero && canMove(transform.position - posOffset, dir,true))
             {
                 runLevel.isMoving = true;
                 targetPos = transform.position + dir;
@@ -107,7 +111,7 @@ public class PlayerController : MonoBehaviour
     
 
     //检测玩家能否移动
-    bool canMove(Vector3 position, Vector3 direction)
+    bool canMove(Vector3 position, Vector3 direction,bool NoPush) //NoPush表示是否是推箱子移动
     {
         Collider2D hit = Physics2D.OverlapBox(position + direction, .9f * Vector3.one,  0f, Colliderable);
         if (hit)
@@ -119,9 +123,8 @@ public class PlayerController : MonoBehaviour
             }
             else if (hit.transform.CompareTag("Pushable"))
             {
-
                 hit.transform.SetParent(transform, true);
-                return canMove(position + direction, direction);
+                return canMove(position + direction, direction,false);
             }
             else
             {
@@ -130,6 +133,17 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
+            if(!NoPush)
+            {   //推着箱子移动时，播放推箱子音效
+                MusicSource.clip = PushClip;
+                MusicSource.Play();
+            }
+            if (NoPush)
+            {    //未推箱子移动时，播放移动音效
+                MusicSource.clip = MoveClip;
+                MusicSource.Play();
+            }
+            
             return true;
         }
 

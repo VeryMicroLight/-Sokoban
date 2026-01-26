@@ -18,7 +18,7 @@ public class RunLevel : MonoBehaviour
     public bool isMoving = false;
     public Vector3 checkPointPosOffset;
     public LayerMask Colliderable;
-
+    public GameObject WinPanel;
 
     private void Start()
     {
@@ -28,11 +28,17 @@ public class RunLevel : MonoBehaviour
     private void Update()
     {
         /*
-            在isMoving为true时，进行移动（如果要插入音效就在这个状态）
+            在isMoving为true时，进行移动（如果要插入音效就在这个状态）   （ fade:不用了，插入到人物脚本了 ）
             反之在isMoving为false时，游戏会结算状态（比如解除箱子与玩家的联系，判断是否通关等）
             TODO: 也许可以加一些结算时的新机制
-         
-         
+
+        fade
+        fade
+        fade
+        fade
+        fade
+        fade:看这里
+         fade:  游戏胜利时，使用WinPanel.SetActive (true); 显示胜利画面（觉得丑就自己改）
          */
 
 
