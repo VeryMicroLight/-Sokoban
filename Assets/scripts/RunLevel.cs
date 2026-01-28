@@ -54,7 +54,8 @@ public class RunLevel : MonoBehaviour
             {
                 //TODO: 关卡完成方法
                 //LevelComplete()
-                print("Level Complete!");
+                //print("Level Complete!");
+                WinPanel.SetActive(true);
             }
         }
     }

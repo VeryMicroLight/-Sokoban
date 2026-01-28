@@ -17,7 +17,6 @@ public class PlayerController : MonoBehaviour
     public float walkSpeed = 10f;
     public Vector3 dir;
     public Vector3 posOffset;
-    private Vector3 posOffset2;
     private Vector3 targetPos;
     public LayerMask Colliderable;
     private RunLevel runLevel;
@@ -29,7 +28,6 @@ public class PlayerController : MonoBehaviour
     {
         runLevel = Level.GetComponent<RunLevel>();
         IptControl = new PlayerControl();
-        posOffset2 = new Vector3(Mathf.Round(transform.position.x) - transform.position.x, Mathf.Round(transform.position.y) - transform.position.y, 0);
         transform.position = new Vector3(Mathf.Round(transform.position.x), Mathf.Round(transform.position.y), 0) + posOffset;
     }
 
